@@ -1,5 +1,10 @@
-import React from "react";
+import React, { useState } from "react";
 
 export default function FlashCard({ flashcard }) {
-  return <div>{flashcard.questions}</div>;
+  const [flip, setFlip] = useState(false);
+  return (
+    <div onClick={() => setFlip(!flip)}>
+      {flip ? flashcard.answer : flashcard.questions}
+    </div>
+  );
 }
