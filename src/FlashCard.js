@@ -5,7 +5,7 @@ export default function FlashCard({ flashcard }) {
 
   return (
     <div
-      className={`card ${flip ? "flip" : ""}`}
+      className={`flashcard ${flip ? "flip" : ""}`}
       onClick={() => setFlip(!flip)}
     >
       <div className="flashcard-questions">
