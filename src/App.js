@@ -25,9 +25,13 @@ function App() {
 
       // console.log(res.data);
     });
-  });
+  }, []);
 
-  return <Group flashcards={flashcards} />;
+  return (
+    <div className="container">
+      <Group flashcards={flashcards} />;
+    </div>
+  );
 }
 
 const SAMPLE_FLASHCARDS = [
