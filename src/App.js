@@ -1,9 +1,32 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Group from "./Group";
 import "./App.css";
+import axios from "axios";
 
 function App() {
   const [flashcards, setFlashcards] = useState(SAMPLE_FLASHCARDS);
+
+  useEffect(() => {
+    axios.get("http://localhost:8000/SAMPLE_FLASHCARDS").then((res) => {
+      // console.log("Flashcards data:", res.data);
+      setFlashcards(
+        res.data.map((questionItem, index) => {
+          // console.log("Mapping flashcard:", questionItem);
+          return {
+            id: `${index}-${Date.now()}`,
+            questions: questionItem.questions || questionItem.question,
+            answers: questionItem.answers,
+            options: questionItem.options,
+            subject: questionItem.subject,
+            difficulty: questionItem.difficulty,
+          };
+        })
+      );
+
+      // console.log(res.data);
+    });
+  });
+
   return <Group flashcards={flashcards} />;
 }
 

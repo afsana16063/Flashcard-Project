@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 export default function FlashCard({ flashcard }) {
   const [flip, setFlip] = useState(false);
