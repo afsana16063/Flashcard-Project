@@ -1,49 +1,37 @@
-body {
-  background-color: #ffffff;
-  margin: 0;
-}
-
+/* App.css */
 .container {
-  margin: 0.5rem;
+  max-width: 100%;
+  margin: 0 auto;
+  background-color: #fff;
 }
 
-.flashcard-grid {
-  display: grid;
-  align-items: center;
-  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-  gap: 1rem;
-}
-
-.flashcard {
+.MainButtons {
   display: flex;
   justify-content: center;
-  align-items: center;
-  position: relative;
-  margin: 15px;
-  background-color: #4f48ec;
-  color: #ffffff;
-  border-radius: 20%;
-  height: 200px;
-  transform-style: preserve-3d;
-  transform: rotateY(var(--rotate-y, 0)) translateY(var(--translate-y, 0));
+  background-color: #54849d1d;
+}
+
+.btn {
+  padding: 20px;
   cursor: pointer;
+  font-size: 20px;
+  margin: 50px;
 }
 
-.flashcard:hover {
-  --translate-y: -2px;
+.btn_home,
+.btn_main,
+.btn_contact {
+  background-color: #5048ec08;
+  border-color: #54839d;
+  border: solid;
+  color: #54839d;
 }
 
-.flashcard.flip {
-  --rotate-y: 180deg;
-}
-
-.flashcard-answers {
-  transform: rotateY(180deg);
-}
-
-.flashcard .flashcard-questions,
-.flashcard .flashcard-answers {
-  position: absolute;
-  padding: 1rem;
-  backface-visibility: hidden;
+.btn_home:hover,
+.btn_main:hover,
+.btn_contact:hover {
+  background-color: #54839d;
+  border-color: #54839d;
+  border: solid;
+  color: #ffffff;
 }

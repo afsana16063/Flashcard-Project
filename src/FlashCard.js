@@ -18,9 +18,5 @@ export default function FlashCard({ flashcard }) {
       </div>
       <div className="flashcard-answers">{flashcard.answers}</div>
     </div>
-
-    // <div onClick={() => setFlip(!flip)}>
-    //   {flip ? flashcard.answer : flashcard.questions}
-    // </div>
   );
 }
