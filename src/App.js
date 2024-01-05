@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import Home from "./Home";
 import Main from "./Main";
 import Contact from "./Contact";
-import "./App.css";
+import "./components/App.css";
 
 function App() {
   const [currentPage, setCurrentPage] = useState("home");

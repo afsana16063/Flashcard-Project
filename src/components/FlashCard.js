@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
+import { format } from "date-fns";
 import "./Main.css";
 
 export default function FlashCard({ flashcard, onEdit, onDelete }) {
@@ -22,6 +23,12 @@ export default function FlashCard({ flashcard, onEdit, onDelete }) {
     setEditedStatus(newStatus);
     onEdit({ ...flashcard, status: newStatus });
   };
+
+  // Format the lastModified date using date-fns
+  const formattedLastModified = format(
+    new Date(flashcard.lastModified),
+    "MM/dd/yyyy, hh:mm:ss a"
+  );
 
   return (
     <div
@@ -72,7 +79,7 @@ export default function FlashCard({ flashcard, onEdit, onDelete }) {
         </select>
       </div>
       <div className="last-modified">
-        Last Modified: {flashcard.lastModified}
+        Last Modified: {formattedLastModified}
       </div>
     </div>
   );

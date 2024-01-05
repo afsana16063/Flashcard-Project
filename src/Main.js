@@ -1,14 +1,16 @@
 // Main.js
 import React, { useState, useEffect } from "react";
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
-import Group from "./Group";
-import FlashcardManagement from "./FlashcardManagement.js";
-import FlashCard from "./FlashCard.js";
+import Group from "./components/Group.js";
+import FlashcardManagement from "./components/FlashcardManagement.js";
+import FlashCard from "./components/FlashCard.js";
+import "./components/Main.css";
+
 import axios from "axios";
-import "./Main.css";
 
 function Main(flashcard) {
   const [flashcards, setFlashcards] = useState([]);
+  const [searchQuery, setSearchQuery] = useState("");
 
   useEffect(() => {
     axios.get("http://localhost:3000/SAMPLE_FLASHCARDS").then((res) => {
@@ -28,31 +30,37 @@ function Main(flashcard) {
   }, []);
 
   const handleEditFlashcard = (editedFlashcard) => {
-    setFlashcards((prevFlashcards) => {
-      const updatedFlashcards = [...prevFlashcards];
-      const editedIndex = updatedFlashcards.findIndex(
-        (flashcard) => flashcard.id === editedFlashcard.id
-      );
+    // Get the current date on the client side
+    const currentDate = new Date().toLocaleString();
 
-      if (editedIndex !== -1) {
-        updatedFlashcards[editedIndex] = editedFlashcard;
+    // Update the flashcard data on the server
+    axios
+      .put(
+        `http://localhost:3000/SAMPLE_FLASHCARDS/${editedFlashcard.id}`,
+        editedFlashcard
+      )
+      .then((res) => {
+        // Use the lastModified date from the server response
+        const updatedFlashcard = res.data;
+        console.log("Flashcard updated on the server:", updatedFlashcard);
 
-        // Update the flashcard data on the server
-        axios
-          .put(
-            `http://localhost:3000/SAMPLE_FLASHCARDS/${editedFlashcard.id}`,
-            editedFlashcard
-          )
-          .then((res) => {
-            console.log("Flashcard updated on the server:", editedFlashcard);
-          })
-          .catch((error) => {
-            console.error("Error updating flashcard on the server:", error);
-          });
-      }
+        setFlashcards((prevFlashcards) => {
+          const updatedFlashcards = [...prevFlashcards];
+          const editedIndex = updatedFlashcards.findIndex(
+            (flashcard) => flashcard.id === updatedFlashcard.id
+          );
 
-      return updatedFlashcards;
-    });
+          if (editedIndex !== -1) {
+            // Update the flashcard in the client state with the updated data
+            updatedFlashcards[editedIndex] = updatedFlashcard;
+          }
+
+          return updatedFlashcards;
+        });
+      })
+      .catch((error) => {
+        console.error("Error updating flashcard on the server:", error);
+      });
   };
 
   const handleDeleteFlashcard = (flashcardId) => {

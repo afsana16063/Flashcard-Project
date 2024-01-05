@@ -1,9 +1,10 @@
 // FlashcardManagement.js
 import React, { useState } from "react";
 import axios from "axios";
+import { format } from "date-fns";
 import Modal from "react-modal";
-import Group from "./Group";
 import "./Main.css";
+import Group from "./Group.js";
 
 Modal.setAppElement("#root");
 
@@ -29,10 +30,11 @@ function FlashcardManagement({ setFlashcards }) {
 
   const handleCreateFlashcard = () => {
     const currentDate = new Date().toLocaleString();
+    const uniqueId = `${newFlashcard.questions}-${Date.now()}`;
     axios
       .post("http://localhost:3000/SAMPLE_FLASHCARDS", {
         ...newFlashcard,
-        id: `${newFlashcard.questions}-${currentDate}`,
+        id: uniqueId,
         lastModified: currentDate,
       })
       .then((res) => {
@@ -40,14 +42,13 @@ function FlashcardManagement({ setFlashcards }) {
           ...prevFlashcards,
           {
             ...newFlashcard,
-            id: `${newFlashcard.questions}-${currentDate}`,
+            id: uniqueId,
             lastModified: currentDate,
           },
         ]);
 
         // Reset the form after creating a new flashcard
         setNewFlashcard({
-          id: "",
           questions: "",
           answers: "",
           options: [],

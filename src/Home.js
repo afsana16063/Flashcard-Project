@@ -2,7 +2,7 @@
 import React from "react";
 import Afsana from "./assets/Afsana.jpeg";
 import { FaGithub, FaLinkedinIn, FaYoutube } from "react-icons/fa";
-import "./Home.css";
+import "./components/Home.css";
 
 function Home() {
   return (
