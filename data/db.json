@@ -11,7 +11,7 @@
         "Baku"
       ],
       "category": "geography",
-      "difficulty": "",
+      "difficulty": "Easy",
       "lastModified": "",
       "status": "",
       "amount": ""
@@ -29,7 +29,7 @@
       "category": "math",
       "difficulty": "",
       "lastModified": "",
-      "status": "",
+      "status": "Easy",
       "amount": ""
     },
     {
@@ -45,7 +45,7 @@
       "category": "programming",
       "difficulty": "",
       "lastModified": "",
-      "status": "",
+      "status": "Medium",
       "amount": ""
     },
     {
@@ -61,7 +61,7 @@
       "category": "geography",
       "difficulty": "",
       "lastModified": "",
-      "status": "",
+      "status": "Hard",
       "amount": ""
     },
     {
@@ -270,6 +270,29 @@
       "subject": "",
       "difficulty": "",
       "lastModified": "1/5/2024, 5:26:04 PM"
+    },
+    {
+      "id": "1+1-1704474849351",
+      "questions": "1+1",
+      "answers": "2",
+      "options": [],
+      "subject": "",
+      "difficulty": "",
+      "lastModified": "1/5/2024, 9:14:09 PM"
+    },
+    {
+      "id": "2+2-1704481426760",
+      "questions": "2+2",
+      "answers": "4",
+      "options": [
+        "4",
+        "5",
+        "6",
+        "7"
+      ],
+      "subject": "math",
+      "difficulty": "Easy",
+      "lastModified": "1/5/2024, 11:03:46 PM"
     }
   ],
   "messages": [

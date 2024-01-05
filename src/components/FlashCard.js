@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { format } from "date-fns";
+import { CiShare1 } from "react-icons/ci";
+import { AiOutlineMail } from "react-icons/ai";
 import "./Main.css";
 
 export default function FlashCard({ flashcard, onEdit, onDelete }) {
@@ -10,7 +12,10 @@ export default function FlashCard({ flashcard, onEdit, onDelete }) {
 
   const handleCardClick = (e) => {
     // Prevent the click event propagation when clicking on edit or delete buttons
-    if (e.target.closest(".edit-delete-buttons")) {
+    if (
+      e.target.closest(".edit-delete-buttons") ||
+      e.target.closest(".share-button")
+    ) {
       return;
     }
 
@@ -22,6 +27,30 @@ export default function FlashCard({ flashcard, onEdit, onDelete }) {
     const newStatus = e.target.value;
     setEditedStatus(newStatus);
     onEdit({ ...flashcard, status: newStatus });
+  };
+
+  const handleShareClick = () => {
+    // Implement the logic to send flashcard information via email here
+    const subject = "Flashcard Information";
+    const body = `
+    Flashcard Information:
+    Flashcard:
+    Questions: ${flashcard.questions || "N/A"}
+    Answers: ${flashcard.answers || "N/A"}
+    Options: ${flashcard.options.join(", ") || "N/A"}
+    Difficulty: ${flashcard.difficulty || "N/A"}
+    Status: ${flashcard.status || "N/A"}
+    Last Modified: ${format(
+      new Date(flashcard.lastModified),
+      "MM/dd/yyyy, hh:mm:ss a"
+    )}
+  `;
+
+    // For demonstration purposes, log the flashcard information to the console
+    const mailToLink = `mailto:?subject=${encodeURIComponent(
+      subject
+    )}&body=${encodeURIComponent(body)}`;
+    window.location.href = mailToLink;
   };
 
   // Format the lastModified date using date-fns
@@ -80,6 +109,9 @@ export default function FlashCard({ flashcard, onEdit, onDelete }) {
       </div>
       <div className="last-modified">
         Last Modified: {formattedLastModified}
+      </div>
+      <div className="share-button" onClick={handleShareClick}>
+        <AiOutlineMail />
       </div>
     </div>
   );

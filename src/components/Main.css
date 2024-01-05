@@ -109,13 +109,22 @@ body {
   margin: 8px;
   color: #ffffff;
 }
+.share-button {
+  max-width: 80%;
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  font-size: 12px;
+  margin: 8px;
+  color: #ffffff;
+}
 
 .status {
   max-width: 50%;
   position: absolute;
   top: 0;
   left: 0;
-  font-size: 12px;
+  font-size: 10px;
   margin: 8px;
   color: #ffffff;
 }
