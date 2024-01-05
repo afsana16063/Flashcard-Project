@@ -20,7 +20,7 @@ function Contact() {
 
     try {
       // Make an HTTP POST request to the local JSON server
-      await axios.post("http://localhost:8000/messages", formData);
+      await axios.post("http://localhost:3000/messages", formData);
 
       // Clear the form after successful submission
       setFormData({

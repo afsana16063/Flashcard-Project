@@ -7,6 +7,26 @@ body {
   margin: 0.5rem;
 }
 
+.header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  padding: 0 1.5rem;
+}
+
+.form-set {
+  display: flex;
+  flex-direction: column;
+  margin: 0.5rem;
+}
+
+.form-set > label {
+  color: #54839d;
+  font-size: 2rem;
+  margin: 0.5rem;
+}
+
 .flashcard-grid {
   display: grid;
   align-items: center;
@@ -23,10 +43,13 @@ body {
   background-color: #4f48ec;
   color: #ffffff;
   border-radius: 20%;
-  height: 200px;
+  height: 250px;
   transform-style: preserve-3d;
   transform: rotateY(var(--rotate-y, 0)) translateY(var(--translate-y, 0));
   cursor: pointer;
+  transition: opacity 0.3s;
+  font-size: 20px;
+  padding: 20px 40px;
 }
 
 .flashcard:hover {
@@ -46,4 +69,26 @@ body {
   position: absolute;
   padding: 1rem;
   backface-visibility: hidden;
+}
+
+.add-flashcard {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 3rem;
+}
+
+.edit-delete-buttons {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  display: flex;
+  flex-direction: column;
+  opacity: 0; /* Start with opacity 0, and it will be changed on hover */
+  pointer-events: none; /* Disable interaction when not hovered */
+}
+
+.flashcard.hovered .edit-delete-buttons {
+  opacity: 1;
+  pointer-events: auto; /* Allow interaction with buttons */
 }
