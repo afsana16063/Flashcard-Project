@@ -1,9 +1,11 @@
 // Main.js
 import React, { useState, useEffect } from "react";
+import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 import Group from "./Group";
+import FlashcardManagement from "./FlashcardManagement.js";
+import FlashCard from "./FlashCard.js";
 import axios from "axios";
 import "./Main.css";
-import FlashcardManagement from "./FlashcardManagement.js";
 
 function Main() {
   const [flashcards, setFlashcards] = useState([]);
@@ -23,11 +25,37 @@ function Main() {
     });
   }, []);
 
+  const handleEditFlashcard = (editedFlashcard) => {
+    setFlashcards((prevFlashcards) => {
+      const updatedFlashcards = [...prevFlashcards];
+      const editedIndex = updatedFlashcards.findIndex(
+        (flashcard) => flashcard.id === editedFlashcard.id
+      );
+      console.log(updatedFlashcards);
+      console.log(editedFlashcard);
+
+      if (editedIndex !== -1) {
+        updatedFlashcards[editedIndex] = editedFlashcard;
+      }
+
+      return updatedFlashcards;
+    });
+  };
+
+  const handleDeleteFlashcard = (flashcardId) => {
+    setFlashcards((prevFlashcards) =>
+      prevFlashcards.filter((flashcard) => flashcard.id !== flashcardId)
+    );
+  };
   return (
     <div className="container">
       <h1>Flashcard Management System</h1>
       <FlashcardManagement setFlashcards={setFlashcards} />
-      <Group flashcards={flashcards} />
+      <Group
+        flashcards={flashcards}
+        onDelete={handleDeleteFlashcard}
+        onEdit={handleEditFlashcard}
+      />
     </div>
   );
 }

@@ -40,7 +40,7 @@ body {
   align-items: center;
   position: relative;
   margin: 15px;
-  background-color: #4f48ec;
+  background-color: #54839d;
   color: #ffffff;
   border-radius: 20%;
   height: 250px;
@@ -91,4 +91,9 @@ body {
 .flashcard.hovered .edit-delete-buttons {
   opacity: 1;
   pointer-events: auto; /* Allow interaction with buttons */
+}
+
+.edit-delete-buttons > button {
+  background-color: #ffffff;
+  color: #54839d;
 }

@@ -28,7 +28,8 @@ export default function FlashCard({ flashcard, onEdit, onDelete }) {
         <button
           onClick={(e) => {
             e.stopPropagation();
-            onEdit(flashcard);
+            console.log("Edit button clicked");
+            onEdit(flashcard); // Pass the specific flashcard to onEdit
           }}
         >
           Edit

@@ -1,12 +1,17 @@
 import React from "react";
 import FlashCard from "./FlashCard";
 
-export default function Group({ flashcards }) {
+export default function Group({ flashcards, onEdit, onDelete }) {
   return (
     <div className="flashcard-grid">
-      {flashcards.map((flashcard) => {
-        return <FlashCard flashcard={flashcard} key={flashcard.id} />;
-      })}
+      {flashcards.map((flashcard) => (
+        <FlashCard
+          flashcard={flashcard}
+          key={flashcard.id}
+          onEdit={onEdit}
+          onDelete={onDelete}
+        />
+      ))}
     </div>
   );
 }
