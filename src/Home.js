@@ -46,7 +46,64 @@ function Home() {
           <img src={Afsana} width={600}></img>
         </div>
       </div>
-      <div className="portfolio"></div>;
+      <div className="portfolio">
+        <h1>My Projects</h1>
+        <div className="project-card">
+          <h3>Project 1</h3>
+          <p>Simple Dice Roll Game - Refresh to play! </p>
+          <a
+            href="https://afsana16063.github.io/DiceChallenge/"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            View Project
+          </a>
+          <a
+            href="https://github.com/afsana16063/DiceChallenge"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <FaGithub />
+          </a>
+        </div>
+        <div className="project-card">
+          <h3>Project 2</h3>
+          <p>The game ends when someone is 100!</p>
+          <a
+            href="https://afsana16063.github.io/Pig-Game/"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            View Project
+          </a>
+          <a
+            href="https://github.com/afsana16063/Pig-Game"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <FaGithub />
+          </a>
+        </div>
+        <div className="project-card">
+          <h3>Project 3</h3>
+          <p>Description of Project 3</p>
+          <a
+            href="https://afsana16063.github.io/Drum-Kit/"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            View Project
+          </a>
+          <a
+            href="https://github.com/afsana16063/Drum-Kit"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <FaGithub />
+          </a>
+        </div>
+      </div>
+      ;
     </>
   );
 }
