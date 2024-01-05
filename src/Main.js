@@ -4,7 +4,7 @@ import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 import Group from "./components/Group.js";
 import FlashcardManagement from "./components/FlashcardManagement.js";
 import FlashCard from "./components/FlashCard.js";
-import { InputGroup, FormControl, Dropdown } from "react-bootstrap";
+import { Pagination, InputGroup, FormControl, Dropdown } from "react-bootstrap";
 import "./components/Main.css";
 
 import axios from "axios";
@@ -13,6 +13,8 @@ function Main(flashcard) {
   const [flashcards, setFlashcards] = useState([]);
   const [searchQuery, setSearchQuery] = useState("");
   const [filterDifficulty, setFilterDifficulty] = useState("");
+  const [currentPage, setCurrentPage] = useState(1);
+  const [flashcardsPerPage] = useState(10);
 
   useEffect(() => {
     axios.get("http://localhost:3000/SAMPLE_FLASHCARDS").then((res) => {
@@ -71,6 +73,15 @@ function Main(flashcard) {
     );
   };
 
+  const indexOfLastFlashcard = currentPage * flashcardsPerPage;
+  const indexOfFirstFlashcard = indexOfLastFlashcard - flashcardsPerPage;
+  const currentFlashcards = flashcards.slice(
+    indexOfFirstFlashcard,
+    indexOfLastFlashcard
+  );
+
+  const paginate = (pageNumber) => setCurrentPage(pageNumber);
+
   const filteredFlashcards = flashcards.filter((flashcard) => {
     const includesSearchQuery =
       !searchQuery ||
@@ -120,6 +131,19 @@ function Main(flashcard) {
         onDelete={handleDeleteFlashcard}
         onEdit={handleEditFlashcard}
       />
+      <Pagination>
+        {Array.from({
+          length: Math.ceil(flashcards.length / flashcardsPerPage),
+        }).map((item, index) => (
+          <Pagination.Item
+            key={index + 1}
+            active={index + 1 === currentPage}
+            onClick={() => paginate(index + 1)}
+          >
+            {index + 1}
+          </Pagination.Item>
+        ))}
+      </Pagination>
     </div>
   );
 }
