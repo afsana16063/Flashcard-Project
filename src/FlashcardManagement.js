@@ -9,6 +9,7 @@ Modal.setAppElement("#root");
 
 function FlashcardManagement({ setFlashcards }) {
   const [newFlashcard, setNewFlashcard] = useState({
+    id: "",
     questions: "",
     answers: "",
     options: [],
@@ -27,19 +28,26 @@ function FlashcardManagement({ setFlashcards }) {
   };
 
   const handleCreateFlashcard = () => {
+    const currentDate = new Date().toLocaleString();
     axios
-      .post("http://localhost:3000/SAMPLE_FLASHCARDS", newFlashcard)
+      .post("http://localhost:3000/SAMPLE_FLASHCARDS", {
+        ...newFlashcard,
+        id: `${newFlashcard.questions}-${currentDate}`,
+        lastModified: currentDate,
+      })
       .then((res) => {
         setFlashcards((prevFlashcards) => [
           ...prevFlashcards,
           {
-            id: `${prevFlashcards.length}-${Date.now()}`,
             ...newFlashcard,
+            id: `${newFlashcard.questions}-${currentDate}`,
+            lastModified: currentDate,
           },
         ]);
 
         // Reset the form after creating a new flashcard
         setNewFlashcard({
+          id: "",
           questions: "",
           answers: "",
           options: [],

@@ -7,7 +7,7 @@ import FlashCard from "./FlashCard.js";
 import axios from "axios";
 import "./Main.css";
 
-function Main() {
+function Main(flashcard) {
   const [flashcards, setFlashcards] = useState([]);
 
   useEffect(() => {
@@ -20,6 +20,8 @@ function Main() {
           options: questionItem.options,
           subject: questionItem.subject,
           difficulty: questionItem.difficulty,
+          lastModified: new Date().toLocaleString(),
+          status: "Want to Learn", // Default status
         }))
       );
     });
@@ -31,11 +33,22 @@ function Main() {
       const editedIndex = updatedFlashcards.findIndex(
         (flashcard) => flashcard.id === editedFlashcard.id
       );
-      console.log(updatedFlashcards);
-      console.log(editedFlashcard);
 
       if (editedIndex !== -1) {
         updatedFlashcards[editedIndex] = editedFlashcard;
+
+        // Update the flashcard data on the server
+        axios
+          .put(
+            `http://localhost:3000/SAMPLE_FLASHCARDS/${editedFlashcard.id}`,
+            editedFlashcard
+          )
+          .then((res) => {
+            console.log("Flashcard updated on the server:", editedFlashcard);
+          })
+          .catch((error) => {
+            console.error("Error updating flashcard on the server:", error);
+          });
       }
 
       return updatedFlashcards;

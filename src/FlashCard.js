@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
+import "./Main.css";
 
 export default function FlashCard({ flashcard, onEdit, onDelete }) {
   const [flip, setFlip] = useState(false);
   const [isHovered, setIsHovered] = useState(false);
+  const [editedStatus, setEditedStatus] = useState(flashcard.status);
 
   const handleCardClick = (e) => {
     // Prevent the click event propagation when clicking on edit or delete buttons
@@ -13,6 +15,12 @@ export default function FlashCard({ flashcard, onEdit, onDelete }) {
 
     // Toggle the flip state when clicking on the card
     setFlip(!flip);
+  };
+
+  const handleStatusChange = (e) => {
+    const newStatus = e.target.value;
+    setEditedStatus(newStatus);
+    onEdit({ ...flashcard, status: newStatus });
   };
 
   return (
@@ -29,7 +37,7 @@ export default function FlashCard({ flashcard, onEdit, onDelete }) {
           onClick={(e) => {
             e.stopPropagation();
             console.log("Edit button clicked");
-            onEdit(flashcard); // Pass the specific flashcard to onEdit
+            onEdit(flashcard.id); // Pass the specific flashcard to onEdit
           }}
         >
           Edit
@@ -54,6 +62,18 @@ export default function FlashCard({ flashcard, onEdit, onDelete }) {
         </div>
       </div>
       <div className="flashcard-answers">{flashcard.answers}</div>
+      {/* {flip && ( */}
+      <div className="status">
+        Status:
+        <select value={editedStatus} onChange={handleStatusChange}>
+          <option value="Learned">Learned</option>
+          <option value="Want to Learn">Want to Learn</option>
+          <option value="Noted">Noted</option>
+        </select>
+      </div>
+      <div className="last-modified">
+        Last Modified: {flashcard.lastModified}
+      </div>
     </div>
   );
 }
