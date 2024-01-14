@@ -4,7 +4,7 @@
 
 This project implements a Flashcard Management System using React.js. It includes components for displaying, creating, and managing flashcards, along with additional features such as drag-and-drop and pagination.
 
-Link to YouTube: https://youtu.be/lJPEyjQxDDA
+Link to YouTube: https://www.youtube.com/watch?v=o-6mMx-J6Xk
 LInk to GitHub repo: https://github.com/afsana16063/flashcard-project
 Link to GitHub pages:https://afsana16063.github.io/flashcard-project/
 
